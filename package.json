@@ -1,6 +1,6 @@
 {
   "name": "node-buildkit",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "description": "",
   "license": "MIT",
   "author": "<mail@henrygressmann.de>",
@@ -8,17 +8,15 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "bin": {
-    "node-buildkit": "./bin/buildkit.mjs",
-    "buildkit": "./bin/buildkit.mjs"
+    "buildctl": "./bin/buildctl",
+    "buildkitd": "./bin/buildkitd"
   },
   "exports": {
     ".": "./lib/index.js",
     "./lib/*": "./lib/*"
   },
   "files": [
-    "./lib/*",
-    "./bin/buildkit.cmd",
-    "./bin/buildkit.mjs"
+    "./lib/*"
   ],
   "scripts": {
     "watch": "npm run build:esbuild -- --watch",
@@ -31,7 +29,8 @@
     "types": "tsc -p tsconfig.build.json",
     "preversion": "npm run build",
     "postinstall": "node ./postinstall.js",
-    "download": "node lib/download.js"
+    "download": "node lib/download.js",
+    "buildkit": "./bin/buildkit.mjs"
   },
   "devDependencies": {
     "@explodingcamera/eslint-config": "^21.0.1",

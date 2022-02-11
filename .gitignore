@@ -5,5 +5,3 @@ lib
 .pnp.*
 .pnpm-debug.log
 bin/*
-!bin/buildkit.mjs
-!bin/buildkit.cmd
