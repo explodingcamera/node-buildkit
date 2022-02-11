@@ -1,0 +1,59 @@
+{
+  "name": "node-buildkit",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "author": "<mail@henrygressmann.de>",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "bin": {
+    "node-buildkit": "./bin/buildkit.mjs",
+    "buildkit": "./bin/buildkit.mjs"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./lib/*": "./lib/*"
+  },
+  "files": [
+    "./lib/*",
+    "./bin/buildkit.cmd",
+    "./bin/buildkit.mjs"
+  ],
+  "scripts": {
+    "watch": "npm run build:esbuild -- --watch",
+    "build": "npm run build:esbuild && npm run types",
+    "build:esbuild": "esbuild src/*.ts --bundle --splitting --chunk-names=chunks/[name]-[hash] --outdir=lib --platform=node --external:undici --external:tar --target=node16 --format=esm",
+    "dev": "node --loader=ts-node/esm --no-warnings src/index.ts",
+    "release": "release-it",
+    "test": "tap --ts --node-arg=--no-warnings --node-arg=--loader=ts-node/esm",
+    "snapshot": "TAP_SNAPSHOT=1 npm run test",
+    "types": "tsc -p tsconfig.build.json",
+    "preversion": "npm run build",
+    "postinstall": "node lib/download.js"
+  },
+  "devDependencies": {
+    "@explodingcamera/eslint-config": "^21.0.1",
+    "@types/node": "^17.0.16",
+    "@types/tap": "^15.0.5",
+    "esbuild": "^0.14.21",
+    "eslint": "^8.8.0",
+    "release-it": "^14.12.4",
+    "tap": "^15.1.6",
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
+  },
+  "release-it": {
+    "git": {
+      "commitMessage": "chore: release v${version}"
+    },
+    "github": {
+      "release": true
+    }
+  },
+  "dependencies": {
+    "@types/tar": "^6.1.1",
+    "tar": "^6.1.11",
+    "undici": "^4.13.0"
+  }
+}
