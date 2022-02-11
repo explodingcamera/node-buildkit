@@ -30,7 +30,8 @@
     "snapshot": "TAP_SNAPSHOT=1 npm run test",
     "types": "tsc -p tsconfig.build.json",
     "preversion": "npm run build",
-    "postinstall": "node lib/download.js"
+    "postinstall": "node ./postinstall.js",
+    "download": "node lib/download.js"
   },
   "devDependencies": {
     "@explodingcamera/eslint-config": "^21.0.1",
